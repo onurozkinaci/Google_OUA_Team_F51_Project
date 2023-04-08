@@ -38,13 +38,13 @@ class _GreetingPageState extends State<GreetingPage> {
             ),
             SpecializedButton(
                 title: 'LOGIN',
-                color: Colors.lightBlueAccent,
+                color: Colors.lightBlue[900],
                 onPressedFunc: () {
                   Navigator.pushNamed(context, LoginPage.id);
                 }),
             SpecializedButton(
                 title: 'REGISTER',
-                color: Colors.lightBlueAccent,
+                color: Colors.lightBlue[900],
                 onPressedFunc: () {
                   Navigator.pushNamed(context, RegisterPage.id);
                 }),

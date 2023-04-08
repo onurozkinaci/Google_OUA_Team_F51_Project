@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_appjamproject/pages/login_page.dart';
 import 'package:flutter_appjamproject/pages/note_list_page.dart';
 
 final _firestore = FirebaseFirestore.instance;
@@ -45,8 +44,8 @@ class _NoteSlidePageState extends State<NoteSlidePage> {
             onPressed: () {
               Navigator.pushNamed(context, NoteListPage.id);
             }),
-        backgroundColor: Colors.teal[900],
-        title: const Text('Not Slaytı'),
+        backgroundColor: Colors.lightBlue[900],
+        title: const Text('Note Slides'),
       ),
       body: SafeArea(
         child: Column(
@@ -72,7 +71,7 @@ class NoteCard extends StatelessWidget {
       child: Center(
         child: Card(
           elevation: 8,
-          shadowColor: Colors.teal,
+          shadowColor: Colors.lightBlue[900],
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           color: Colors.teal[900],
@@ -91,10 +90,10 @@ class NoteCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      //textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,
                       metin,
-                      style: const TextStyle(
-                        color: Colors.white70,
+                      style: TextStyle(
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

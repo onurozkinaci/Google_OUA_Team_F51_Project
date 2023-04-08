@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appjamproject/pages/greeting_page.dart';
-import 'package:flutter_appjamproject/pages/login_page.dart';
-import 'package:flutter_appjamproject/pages/note_list_page.dart';
+import 'package:flutter_appjamproject/pages/note_type_selection.dart';
 import '../constants.dart';
 import '../widgets/specializedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Navigator.pushNamed(context, GreetingPage.id);
             }),
         title: Text('Register Page'),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.lightBlue[900],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -82,7 +81,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: 200.0,
                 child: SpecializedButton(
                     title: 'REGISTER',
-                    color: Colors.lightBlueAccent,
+                    color: Colors.lightBlue[900],
                     onPressedFunc: () async {
                       //Bu islem Future dondugu ve async old. icin user'in olusturulup olusturulmadigi bilgisini atandigi
                       //degisken (newUser) uzerinden kontrol edebiliriz. 'await' ve 'async' kullanimiyla bu islemin bitmesini bekleyip etkiledigi
@@ -101,9 +100,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               backgroundColor: Colors.black26,
                               textColor: Colors.white,
                               fontSize: 16.0);
-                          Navigator.pushNamed(context, NoteListPage.id);
-                          //=>Basarili bir sekilde uygulamaya kaydolan/register kullanici, not ekleyebilecegi ve notlarini gorebilecegi NoteListPage
-                          // sayfasina yonlendirilir.
+                          Navigator.pushNamed(
+                              context, NoteTypeSelectionPage.id);
+                          //=>Basarili bir sekilde uygulamaya kaydolan/register kullanici, kendi notlarini veya grup arkadaslarinin notlarini gormek icin secim yapacagi
+                          //NoteTypeSelectionPage sayfasina yonlendirilecek.
                         }
                       } catch (error) {
                         print(error);

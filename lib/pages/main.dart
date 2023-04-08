@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appjamproject/pages/greeting_page.dart';
 import 'package:flutter_appjamproject/pages/note_list_page.dart';
 import 'package:flutter_appjamproject/pages/note_slide_page.dart';
+import 'package:flutter_appjamproject/pages/note_type_selection.dart';
 import '../pages/login_page.dart';
 import '../pages/register_page.dart';
 
@@ -29,6 +30,7 @@ class InfoCardApp extends StatelessWidget {
         RegisterPage.id: (context) => RegisterPage(),
         NoteListPage.id: (context) => NoteListPage(),
         NoteSlidePage.id: (context) => NoteSlidePage(),
+        NoteTypeSelectionPage.id: (context) => NoteTypeSelectionPage(),
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_appjamproject/pages/login_page.dart';
+import 'package:flutter_appjamproject/pages/note_type_selection.dart';
 import 'note_slide_page.dart';
 
 final _firestore = FirebaseFirestore.instance;
@@ -58,14 +59,14 @@ class _NoteListPageState extends State<NoteListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal[900],
+        backgroundColor: Colors.lightBlue[900],
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pushNamed(context, LoginPage.id);
+              Navigator.pushNamed(context, NoteTypeSelectionPage.id);
             }),
         title: Text(
-          'Not Listesi',
+          'Note List',
         ),
         actions: [
           Padding(
@@ -85,7 +86,7 @@ class _NoteListPageState extends State<NoteListPage> {
                     //getNotesStream();
                   }),
                   child: Text(
-                    'Not Slaytı',
+                    'Note Slides',
                     style: TextStyle(color: Colors.black),
                   ),
                 ),
@@ -109,7 +110,7 @@ class _NoteListPageState extends State<NoteListPage> {
       ),
       floatingActionButton: FloatingActionButton(
         //mini:true,
-        backgroundColor: Colors.teal[800],
+        backgroundColor: Colors.lightBlue[900],
         onPressed: () {
           showDialog(
             context: context,
@@ -117,7 +118,7 @@ class _NoteListPageState extends State<NoteListPage> {
               String baslik = ''; // burada varsayılan değer atanması gerekiyor
               String metin = ''; // burada varsayılan değer atanması gerekiyor
               return AlertDialog(
-                title: Text('Yeni Not Ekle'),
+                title: Text('Add New Note'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -126,8 +127,8 @@ class _NoteListPageState extends State<NoteListPage> {
                         baslik = value; // baslik burada güncelleniyor
                       },
                       decoration: InputDecoration(
-                        labelText: 'Başlık',
-                        hintText: 'Not Başlığı',
+                        labelText: 'Caption',
+                        hintText: 'Note Caption',
                       ),
                     ),
                     Flexible(
@@ -136,8 +137,8 @@ class _NoteListPageState extends State<NoteListPage> {
                           metin = value; // metin burada güncelleniyor
                         },
                         decoration: InputDecoration(
-                          labelText: 'Metin',
-                          hintText: 'Not Metni',
+                          labelText: 'Content',
+                          hintText: 'Note Content',
                         ),
                       ),
                     ),
@@ -159,13 +160,14 @@ class _NoteListPageState extends State<NoteListPage> {
                         Navigator.of(context).pop();
                       }
                     },
-                    child: Text('Ekle'),
+                    child: Text('Save'),
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('İptal', style: TextStyle(color: Colors.white)),
+                    child:
+                        Text('Cancel', style: TextStyle(color: Colors.white)),
                     style:
                         TextButton.styleFrom(backgroundColor: Colors.red[900]),
                   ),
@@ -204,7 +206,7 @@ class _NotDetayState extends State<NotDetay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal[900],
+        backgroundColor: Colors.lightBlue[900],
         title: Text(caption, style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           Padding(
@@ -221,7 +223,7 @@ class _NotDetayState extends State<NotDetay> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text('Notu Guncelle'),
+                        title: Text('Edit The Note'),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -230,8 +232,8 @@ class _NotDetayState extends State<NotDetay> {
                                 caption = value;
                               },
                               decoration: InputDecoration(
-                                labelText: 'Yeni Başlık',
-                                hintText: 'Not Başlığı',
+                                labelText: 'New Caption',
+                                hintText: 'Note Caption',
                               ),
                             ),
                             Flexible(
@@ -240,8 +242,8 @@ class _NotDetayState extends State<NotDetay> {
                                   content = value; // metin burada güncelleniyor
                                 },
                                 decoration: InputDecoration(
-                                  labelText: 'Yeni Metin',
-                                  hintText: 'Not Metni',
+                                  labelText: 'New Content',
+                                  hintText: 'Note Content',
                                 ),
                               ),
                             ),
@@ -266,7 +268,7 @@ class _NotDetayState extends State<NotDetay> {
                                 Navigator.pushNamed(context, NoteListPage.id);
                               }
                             },
-                            child: Text('Güncelle'),
+                            child: Text('Update'),
                           ),
                           TextButton(
                             style: TextButton.styleFrom(
@@ -274,7 +276,7 @@ class _NotDetayState extends State<NotDetay> {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text('İptal',
+                            child: Text('Cancel',
                                 style: TextStyle(color: Colors.white)),
                           ),
                         ],
@@ -282,7 +284,7 @@ class _NotDetayState extends State<NotDetay> {
                     });
               }),
               child: Text(
-                'Notu Düzenle',
+                'Edit Note',
                 style: TextStyle(color: Colors.black),
               ),
             ),
@@ -307,9 +309,9 @@ class Not extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
-      shadowColor: Colors.teal,
+      shadowColor: Colors.lightBlue[900],
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      color: Colors.teal[800],
+      color: Colors.lightBlue[800],
       child: ListTile(
         trailing: IconButton(
             onPressed: () {
@@ -336,7 +338,7 @@ class Not extends StatelessWidget {
                       ),
                       TextButton(
                         style: TextButton.styleFrom(
-                            backgroundColor: Colors.teal[900]),
+                            backgroundColor: Colors.lightBlue[900]),
                         child: const Text(
                           'Evet',
                           style: TextStyle(color: Colors.white),

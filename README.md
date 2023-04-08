@@ -15,3 +15,6 @@ after subcsription.
 
 Moreover, the taken notes can be seen in a slide appearance too besides showing them in a list appearance.
 
+The users will also be able to see other group users' notes in order to track both their individual notes and their
+group members' notes. It has been developed and coming soon...
+
