@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_appjamproject/pages/login_page.dart';
+import 'note_slide_page.dart';
 
 final _firestore = FirebaseFirestore.instance;
 late User loggedInUser;
@@ -30,7 +31,7 @@ class _NoteListPageState extends State<NoteListPage> {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
+        //print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -57,6 +58,7 @@ class _NoteListPageState extends State<NoteListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal[900],
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back),
             onPressed: () {
@@ -79,7 +81,7 @@ class _NoteListPageState extends State<NoteListPage> {
                   ),
                   onPressed: (() {
                     //TODO:Eklendikten sonra notlarin slayt seklinde listelendigi sayfaya gecis yapilacak;
-                    print("Not slaytı sayfası açıldı.");
+                    Navigator.pushNamed(context, NoteSlidePage.id);
                     //getNotesStream();
                   }),
                   child: Text(
@@ -106,6 +108,8 @@ class _NoteListPageState extends State<NoteListPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        //mini:true,
+        backgroundColor: Colors.teal[800],
         onPressed: () {
           showDialog(
             context: context,
@@ -141,6 +145,8 @@ class _NoteListPageState extends State<NoteListPage> {
                 ),
                 actions: [
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal[900]),
                     onPressed: () {
                       if (baslik.isNotEmpty && metin.isNotEmpty) {
                         //=>Giris yapan kullanicinin mail adresi ile ona ozgu kilacak sekilde ekledigi not Firebase Firestore'a kaydedilir;
@@ -159,7 +165,9 @@ class _NoteListPageState extends State<NoteListPage> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('İptal'),
+                    child: Text('İptal', style: TextStyle(color: Colors.white)),
+                    style:
+                        TextButton.styleFrom(backgroundColor: Colors.red[900]),
                   ),
                 ],
               );
@@ -196,7 +204,8 @@ class _NotDetayState extends State<NotDetay> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(caption),
+        backgroundColor: Colors.teal[900],
+        title: Text(caption, style: TextStyle(fontWeight: FontWeight.bold)),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -240,6 +249,8 @@ class _NotDetayState extends State<NotDetay> {
                         ),
                         actions: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal[900]),
                             onPressed: () {
                               if (caption.isNotEmpty && content.isNotEmpty) {
                                 _firestore
@@ -248,7 +259,7 @@ class _NotDetayState extends State<NotDetay> {
                                     .update({
                                   'caption': caption,
                                   'content': content,
-                                  'time': Timestamp.now()
+                                  //'time': Timestamp.now()
                                 });
                                 //Navigator.of(context).pop();
                                 //=>Guncelleme yapilirsa liste ekranina geci yapip guncellenen notu gosteriyor;
@@ -258,10 +269,13 @@ class _NotDetayState extends State<NotDetay> {
                             child: Text('Güncelle'),
                           ),
                           TextButton(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Colors.red[900]),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text('İptal'),
+                            child: Text('İptal',
+                                style: TextStyle(color: Colors.white)),
                           ),
                         ],
                       );
@@ -277,7 +291,7 @@ class _NotDetayState extends State<NotDetay> {
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Text(content),
+        child: Text(content, style: TextStyle(fontSize: 20)),
       ),
     );
   }
@@ -292,16 +306,58 @@ class Not extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.teal,
+      elevation: 8,
+      shadowColor: Colors.teal,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      color: Colors.teal[800],
       child: ListTile(
         trailing: IconButton(
             onPressed: () {
-              //=>Trash ikonuna tiklanildiginda ilgili not Firebase Firestore'dan silinir ve stream
-              //kullanimi sayesinde listeden de otomatik olarak kaldirilir (notify edilir);
-              _firestore.collection('notes').doc(docId).delete();
-              //print("Deleted!");
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Sil'),
+                    content: Text(
+                      'Notu silmek istediğinizden emin misiniz?',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    actions: <Widget>[
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.red[900]),
+                        child: const Text(
+                          'Hayır',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.teal[900]),
+                        child: const Text(
+                          'Evet',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          //=>Trash ikonuna tiklanildiginda ilgili not Firebase Firestore'dan silinir ve stream
+                          //kullanimi sayesinde listeden de otomatik olarak kaldirilir (notify edilir);
+                          _firestore.collection('notes').doc(docId).delete();
+                          //print("Deleted!");
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
             },
-            icon: Icon(Icons.delete)),
+            icon: Icon(
+              Icons.delete,
+              color: Colors.white,
+            )),
         title: Text(
           baslik,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
