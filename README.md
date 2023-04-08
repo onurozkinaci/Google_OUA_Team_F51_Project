@@ -1,16 +1,17 @@
-# flutter_appjamproject
+# Flutter App Jam Project
 
-A new Flutter project.
+Flutter App Jam Project which is developed by Team-F51 in Google Game And App Academy.
 
-## Getting Started
+## The App Structure and Usage
 
-This project is a starting point for a Flutter application.
+Users can take the notes in an efficient and useful way with the help of this app after they have signed up
+to the application.
 
-A few resources to get you started if this is your first Flutter project:
+The registered users' informations and the notes that they have taken is stored in Firebase database to be able 
+to fetch the datas effectively by concerning who takes the note to list it later in this Flutter app. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Taken notes are fetched with the usage of Stream structure which helps to notify the place where it used 
+after subcsription.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Moreover, the taken notes can be seen in a slide appearance too besides showing them in a list appearance.
+
