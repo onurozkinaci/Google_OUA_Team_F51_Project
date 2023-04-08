@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appjamproject/constants.dart';
+import 'package:flutter_appjamproject/pages/greeting_page.dart';
 import 'package:flutter_appjamproject/pages/note_list_page.dart';
 import '../widgets/specializedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +22,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, GreetingPage.id);
+            }),
         title: Text('Login Page'),
         backgroundColor: Colors.lightBlueAccent,
       ),
@@ -87,16 +93,15 @@ class _LoginPageState extends State<LoginPage> {
                           //=>Alert message gibi bir 'Toast message' verilerek, diger sayfaya gecilmeden once kullanicinin basarili bir sekilde uygulamaya
                           // giris yapabildiginin bilgisi verilecektir;
                           Fluttertoast.showToast(
-                              msg: "Welcome, the user has logined succesfully!",
+                              msg: "Welcome, the login is successful!",
                               toastLength: Toast.LENGTH_SHORT,
                               gravity: ToastGravity.BOTTOM,
                               backgroundColor: Colors.black26,
                               textColor: Colors.white,
                               fontSize: 16.0);
                           Navigator.pushNamed(context, NoteListPage.id);
-                          /*TODO:eklenince notlarin old. sayfaya gidecek, orada yine FirebaseAuth yapisini kullanarak current user'in(login) olan kim old.
-                                 bilgisine erisebilirsin (FirebaseAuth.instance.currentUser gibi bir kullanimla erisebilirsin).
-                          */
+                          //=>Basarili bir sekilde login olan kullanici, not ekleyebilecegi ve notlarini gorebilecegi NoteListPage
+                          // sayfasina yonlendirilir.
                         }
                       } catch (exception) {
                         print(exception);

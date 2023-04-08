@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appjamproject/pages/greeting_page.dart';
 import 'package:flutter_appjamproject/pages/login_page.dart';
 import 'package:flutter_appjamproject/pages/note_list_page.dart';
 import '../constants.dart';
@@ -22,6 +23,11 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushNamed(context, GreetingPage.id);
+            }),
         title: Text('Register Page'),
         backgroundColor: Colors.lightBlueAccent,
       ),
@@ -96,9 +102,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               textColor: Colors.white,
                               fontSize: 16.0);
                           Navigator.pushNamed(context, NoteListPage.id);
-                          /*TODO:eklenince notlarin old. sayfaya gidecek, orada yine FirebaseAuth yapisini kullanarak current user'in(login) olan kim old.
-                                 bilgisine erisebilirsin (FirebaseAuth.instance.currentUser gibi bir kullanimla erisebilirsin).
-                          */
+                          //=>Basarili bir sekilde uygulamaya kaydolan/register kullanici, not ekleyebilecegi ve notlarini gorebilecegi NoteListPage
+                          // sayfasina yonlendirilir.
                         }
                       } catch (error) {
                         print(error);
